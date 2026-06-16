@@ -53,7 +53,7 @@ export const SERVICES = [
     key: "grease_trap",
     name: "Restaurant Grease Trap Cleaning",
     short: "Grease Trap",
-    desc: "Stay compliant. Recurring maintenance contracts for restaurants & commercial kitchens.",
+    desc: "Stay compliant. Scheduled quarterly maintenance contracts for restaurants & commercial kitchens.",
     color: "#FFB800", // amber
   },
   {

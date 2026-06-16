@@ -19,13 +19,13 @@ const SAFETY_IMG =
 const SERVICES = [
   { icon: Home, title: "Residential Septic Pumping", desc: "Rural homes, manufactured homes, farms, and properties outside city sewer. Preventative maintenance that avoids costly backups.", key: "residential" },
   { icon: Building2, title: "Commercial Septic Pumping", desc: "Apartments, hotels, warehouses, gas stations, and industrial facilities. Scheduled, reliable, professional.", key: "commercial" },
-  { icon: Utensils, title: "Restaurant Grease Trap Cleaning", desc: "Stay compliant. Recurring monthly maintenance for restaurants, fast food, cafeterias, bars & kitchens.", key: "grease_trap" },
+  { icon: Utensils, title: "Restaurant Grease Trap Cleaning", desc: "Stay compliant. Scheduled quarterly maintenance for restaurants, fast food, cafeterias, bars & kitchens.", key: "grease_trap" },
   { icon: Siren, title: "Emergency Pump-Out", desc: "Same-day emergency response across the region. Don't wait until a backup turns into a costly disaster.", key: "emergency" },
 ];
 
 const REVIEWS = [
   { name: "Marcus T.", city: "Spokane Valley, WA", stars: 5, text: "Called Castellon on a Saturday morning with a septic backup. Truck was on-site by noon, job was done by 2pm. Honest pricing, no surprises. Already booked them for annual maintenance." },
-  { name: "Janelle R.", city: "Coeur d'Alene, ID", stars: 5, text: "We run a small Mexican restaurant in CDA. Castellon handles our grease trap on a monthly contract and they have never missed a date. Professional crew, clean job site every time." },
+  { name: "Janelle R.", city: "Coeur d'Alene, ID", stars: 5, text: "We run a small Mexican restaurant in CDA. Castellon handles our grease trap on a quarterly contract and they have never missed a date. Professional crew, clean job site every time." },
   { name: "Brian K.", city: "Cheney, WA", stars: 5, text: "Best septic service in the Spokane area, hands down. The 1,800-gallon truck handled our farm's tank in one trip — competitors needed two visits and charged for both." },
   { name: "Holly D.", city: "Post Falls, ID", stars: 5, text: "Property manager for 3 apartment complexes — Castellon is the only company we trust. They show up, they communicate, the price is fair." },
 ];
