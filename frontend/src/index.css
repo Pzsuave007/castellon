@@ -15,9 +15,9 @@
   --navy: #1f3a2e;         /* DEEP FOREST GREEN (semantic legacy name) */
   --navy-2: #2d5240;
   --navy-soft: #3f6852;
-  --amber: #3b6e8f;        /* SLATE BLUE / STEEL BLUE */
-  --amber-hover: #2a5570;
-  --amber-soft: #b0ccdc;
+  --amber: #c8552e;        /* BURNT ORANGE / RUST */
+  --amber-hover: #a04020;
+  --amber-soft: #f4d0bb;
   --red: #b8442c;          /* terracotta — warmer than pure red */
   --red-hover: #8f3422;
   --muted: #5c6a5c;        /* moss gray */
@@ -304,16 +304,16 @@ textarea::placeholder { color: #94a0a0; }
   padding: 1.25rem 1rem;
 }
 
-/* Hero overlay */
+/* Hero overlay — heavy whitewash to obscure stock-photo branding */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.3) 75%, rgba(31, 58, 46, 0.12) 100%);
+    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.94) 50%, rgba(255, 255, 255, 0.82) 100%);
 }
 @media (max-width: 768px) {
   .hero-overlay {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.96) 30%, rgba(255, 255, 255, 0.6) 70%, rgba(255, 255, 255, 0.2) 100%);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.97) 30%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.6) 100%);
   }
 }
 

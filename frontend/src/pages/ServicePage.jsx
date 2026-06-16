@@ -53,8 +53,13 @@ export default function ServicePage() {
             </div>
           </div>
           <div className="relative aspect-[4/5] bg-navy border-4 border-navy overflow-hidden shadow-[12px_12px_0_var(--amber)] hidden lg:block">
-            <img src={entry.image} alt={entry.name} className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-[var(--navy)]/15" />
+            <img
+              src={entry.image}
+              alt={entry.name}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: "78% center" }}
+            />
+            <div className="absolute inset-0 bg-[var(--navy)]/25" />
             <div className="absolute bottom-4 left-4 right-4 font-display text-white text-3xl leading-none">
               {entry.short}<br />Service
             </div>

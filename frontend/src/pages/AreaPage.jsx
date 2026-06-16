@@ -32,11 +32,7 @@ export default function AreaPage() {
           </Link>
           <div className="eyebrow mb-3">SERVING — {area.state}</div>
           <h1 className="font-display text-5xl sm:text-7xl lg:text-[5.5rem] text-navy mb-6" data-testid="area-headline">
-            Septic Pumping In<br />
-            <span className="relative inline-block">
-              {area.display}
-              <span className="absolute left-0 -bottom-2 h-2 w-full bg-[var(--amber)] -z-10" aria-hidden />
-            </span>
+            Septic Pumping In {area.display}
           </h1>
           <p className="text-lg md:text-xl text-[var(--muted)] max-w-3xl leading-relaxed">{area.intro}</p>
 

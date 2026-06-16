@@ -96,8 +96,13 @@ export default function Landing() {
             {/* Image card on right (desktop) */}
             <div className="hidden lg:block relative">
               <div className="relative aspect-[4/5] bg-navy border-4 border-navy overflow-hidden shadow-[12px_12px_0_var(--amber)]">
-                <img src={HERO_IMG} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-[var(--navy)]/30" />
+                <img
+                  src={HERO_IMG}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ objectPosition: "78% center" }}
+                />
+                <div className="absolute inset-0 bg-[var(--navy)]/40" />
                 <div className="absolute top-4 left-4 right-4 flex items-start justify-between">
                   <div className="bg-white px-3 py-1 font-mono-tiny text-[10px] text-navy">UNIT 01 · 1800 GAL</div>
                   <div className="bg-[var(--amber)] px-3 py-1 font-mono-tiny text-[10px] text-navy">ON DUTY</div>
