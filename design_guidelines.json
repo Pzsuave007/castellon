@@ -1,0 +1,99 @@
+{
+  "theme_and_archetype": {
+    "theme": "dark",
+    "archetype": "Archetype 4 (Swiss & High-Contrast) + Performance Pro Hybrid",
+    "vibe": "Industrial, heavy-duty, modern blue-collar, premium service, cinematic logistics. Anti-generic, anti-SaaS."
+  },
+  "color_palette": {
+    "background": "#050B14",
+    "foreground": "#FFFFFF",
+    "primary_amber": "#FFB800",
+    "primary_amber_hover": "#E6A600",
+    "surface_navy": "#0D1421",
+    "surface_steel": "#1A2534",
+    "border_heavy": "#273549",
+    "emergency_red": "#EF4444",
+    "emergency_red_hover": "#DC2626",
+    "text_muted": "#94A3B8"
+  },
+  "typography": {
+    "headings": {
+      "family": "'Teko', sans-serif",
+      "fallback": "Bebas Neue, sans-serif",
+      "style": "uppercase, tracking-wide, leading-none",
+      "usage": "Use for all H1, H2, H3. Never use Inter or Roboto."
+    },
+    "body": {
+      "family": "'IBM Plex Sans', sans-serif",
+      "fallback": "Chivo, sans-serif",
+      "style": "tracking-tight",
+      "usage": "Use for paragraphs, descriptions, and data tables."
+    }
+  },
+  "layout_and_spacing": {
+    "container": "max-w-7xl mx-auto px-6 lg:px-8",
+    "section_spacing": "py-20 lg:py-32",
+    "grid_system": "Bento-style grids for features and services. Strict grid for admin dashboard.",
+    "border_radius": "rounded-none or rounded-sm (max 4px). Heavy industry does not use soft rounded corners.",
+    "textures": "Use subtle noise/grain overlays over the deep navy backgrounds. Angled/diagonal cuts for section dividers."
+  },
+  "media_urls": {
+    "hero_vacuum_truck": "https://images.unsplash.com/photo-1757191462578-7c59fa85b016?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwzfHx2YWN1dW0lMjB0cnVjayUyMGluZHVzdHJpYWx8ZW58MHx8fHwxNzgxNjQ3NzAzfDA&ixlib=rb-4.1.0&q=85",
+    "service_equipment": "https://images.unsplash.com/photo-1757191462487-6c6c0fe97edd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwyfHx2YWN1dW0lMjB0cnVjayUyMGluZHVzdHJpYWx8ZW58MHx8fHwxNzgxNjQ3NzAzfDA&ixlib=rb-4.1.0&q=85",
+    "heavy_machinery": "https://images.unsplash.com/photo-1503708928676-1cb796a0891e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwzfHxoZWF2eSUyMG1hY2hpbmVyeSUyMGNvbnN0cnVjdGlvbnxlbnwwfHx8fDE3ODE2NDc3MDN8MA&ixlib=rb-4.1.0&q=85",
+    "trust_safety_gear": "https://images.unsplash.com/photo-1552879890-3a06dd3a06c2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwzfHxpbmR1c3RyaWFsJTIwd29ya2VyJTIwc2FmZXR5JTIwZ2VhcnxlbnwwfHx8fDE3ODE2NDc3MDN8MA&ixlib=rb-4.1.0&q=85"
+  },
+  "pages": {
+    "marketing_landing": {
+      "hero": {
+        "layout": "Cinematic full-screen with dark vignette. Background image: hero_vacuum_truck.",
+        "content": "Headline: 'PROFESSIONAL SEPTIC & GREASE PUMPING SERVICES'. Use Teko, text-6xl md:text-8xl, text-white. Include 24/7 Emergency Badge in red.",
+        "ctas": "Primary CTA: Call Now (amber bg, black text). Secondary: Request Quote (transparent bg, steel border, white text)."
+      },
+      "trust_badges": {
+        "layout": "Horizontal banner below hero, surface_navy background.",
+        "content": "Icons: Shield, Hard Hat, Gear, Certified. Text: 'Licensed & Insured', '1800-Gallon Capacity', 'Serving Eastern WA & North ID'."
+      },
+      "services_grid": {
+        "layout": "4-card bento grid (grid-cols-1 md:grid-cols-2 lg:grid-cols-4).",
+        "cards": ["Residential Septic", "Commercial Septic", "Grease Trap Cleaning", "Emergency Pump-Out"],
+        "style": "Cards use surface_steel. Hover effect: subtle lift, 2px bottom border in amber. Industrial icons (lucide-react)."
+      },
+      "service_area": {
+        "layout": "Two-column. Left: Map visual/abstract graphic. Right: Text content.",
+        "content": "Title: '2-HOUR RAPID RESPONSE RADIUS'. List: Spokane, Coeur d'Alene, Post Falls, Pullman. Background: subtle topographic lines or grid."
+      },
+      "emergency_section": {
+        "layout": "Full width, heavy contrast. Dark red to black gradient background.",
+        "content": "High urgency. 'SEPTIC EMERGENCY? WE DISPATCH IMMEDIATELY.' Big red CTA button."
+      },
+      "floating_elements": {
+        "mobile": "Sticky bottom bar on mobile with 'Call Now' and 'Book Online' buttons.",
+        "desktop": "Floating buttons in bottom right corner."
+      }
+    },
+    "booking_app": {
+      "layout": "Focused, clean form flow centered on screen.",
+      "step_1": "Service Selection: 4 large selectable chips/cards for service type.",
+      "step_2": "Calendar: Use Shadcn Calendar, customized to be dark mode with amber selected states. Show available time slots below calendar.",
+      "step_3": "User Info Form: Shadcn Forms (Input, Textarea) with square corners, heavy borders.",
+      "quote_request": "Separate tab/route. Simple form for non-urgent bulk jobs."
+    },
+    "admin_dashboard": {
+      "layout": "Sidebar navigation (Navy), main content area (Obsidian).",
+      "login": "Email/password form. Strict, brutalist UI.",
+      "tabs": {
+        "calendar_view": "Daily/Weekly grid showing confirmed bookings. Color coded: Res (Blue), Com (Steel), Grease (Amber), Emergency (Red).",
+        "quote_requests": "Data table (Shadcn Table) listing pending requests. Row hover in surface_steel.",
+        "availability_settings": "Form to configure working days, hours, and slot duration."
+      }
+    }
+  },
+  "component_instructions": {
+    "buttons": "Square edges (rounded-none). Font: Teko text-xl or 2xl. Heavy padding (px-8 py-4).",
+    "icons": "Use lucide-react. Stroke width 2px or 2.5px.",
+    "testing": "All interactive and key informational elements MUST include a data-testid attribute.",
+    "file_type": "Generate .js and .jsx files, NOT .tsx. Use standard PropTypes or pure JS.",
+    "shadcn_overrides": "Override Shadcn border-radius to 0. Override ring colors to amber-500. Do not use generic Vercel aesthetic."
+  }
+}
