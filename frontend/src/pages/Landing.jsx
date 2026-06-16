@@ -12,11 +12,11 @@ import { SERVICE_LIST } from "@/data/services";
 import { AREA_LIST } from "@/data/areas";
 
 const HERO_IMG =
-  "https://images.unsplash.com/photo-1757191462578-7c59fa85b016?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwzfHx2YWN1dW0lMjB0cnVjayUyMGluZHVzdHJpYWx8ZW58MHx8fHwxNzgxNjQ3NzAzfDA&ixlib=rb-4.1.0&q=85";
+  "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/g3rg5ewk_castellontruck1.png";
 const COMMERCIAL_IMG =
-  "https://images.unsplash.com/photo-1757191462487-6c6c0fe97edd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwyfHx2YWN1dW0lMjB0cnVjayUyMGluZHVzdHJpYWx8ZW58MHx8fHwxNzgxNjQ3NzAzfDA&ixlib=rb-4.1.0&q=85";
+  "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/4jls91bw_castellontruck3.png";
 const SAFETY_IMG =
-  "https://images.unsplash.com/photo-1552879890-3a06dd3a06c2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwzfHxpbmR1c3RyaWFsJTIwd29ya2VyJTIwc2FmZXR5JTIwZ2VhcnxlbnwwfHx8fDE3ODE2NDc3MDN8MA&ixlib=rb-4.1.0&q=85";
+  "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/q81xyr75_castellontruck2.png";
 
 const SERVICES = [
   { icon: Home, title: "Residential Septic Pumping", desc: "Rural homes, manufactured homes, farms, and properties outside city sewer. Preventative maintenance that avoids costly backups.", key: "residential" },
@@ -98,16 +98,15 @@ export default function Landing() {
               <div className="relative aspect-[4/5] bg-navy border-4 border-navy overflow-hidden shadow-[12px_12px_0_var(--amber)]">
                 <img
                   src={HERO_IMG}
-                  alt=""
+                  alt="Castellon Septic Services vacuum truck"
                   className="absolute inset-0 w-full h-full object-cover"
-                  style={{ objectPosition: "78% center" }}
                 />
-                <div className="absolute inset-0 bg-[var(--navy)]/40" />
+                <div className="absolute inset-0 bg-[var(--navy)]/10" />
                 <div className="absolute top-4 left-4 right-4 flex items-start justify-between">
                   <div className="bg-white px-3 py-1 font-mono-tiny text-[10px] text-navy">UNIT 01 · 1800 GAL</div>
-                  <div className="bg-[var(--amber)] px-3 py-1 font-mono-tiny text-[10px] text-navy">ON DUTY</div>
+                  <div className="bg-[var(--lime)] px-3 py-1 font-mono-tiny text-[10px] text-navy font-bold">ON DUTY</div>
                 </div>
-                <div className="absolute bottom-4 left-4 right-4 font-display text-white text-3xl leading-none">
+                <div className="absolute bottom-4 left-4 right-4 font-display text-white text-3xl leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                   Heavy-Duty<br />Vacuum Truck
                 </div>
               </div>

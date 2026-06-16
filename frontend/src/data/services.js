@@ -14,7 +14,7 @@ export const SERVICE_PAGES = {
     intro:
       "If your home runs on a septic system instead of city sewer, regular pumping isn't optional — it's the single best thing you can do to protect your drain field and your wallet. Our 1,800-gallon vacuum truck handles standard residential tanks (1,000–2,000 gal) in a single trip, no second visit needed.",
     image:
-      "https://images.unsplash.com/photo-1757191462578-7c59fa85b016?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwzfHx2YWN1dW0lMjB0cnVjayUyMGluZHVzdHJpYWx8ZW58MHx8fHwxNzgxNjQ3NzAzfDA&ixlib=rb-4.1.0&q=85",
+      "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/g3rg5ewk_castellontruck1.png",
     included: [
       "Full tank pump-out (down to the bottom solids layer)",
       "Sludge & scum layer measurement",
@@ -50,7 +50,7 @@ export const SERVICE_PAGES = {
     intro:
       "Apartment complexes, hotels, gas stations, warehouses, and industrial facilities all share one thing: a septic backup at your property is a business interruption you cannot afford. Castellon runs a scheduled commercial program designed around your operating hours, with reliable pumping that keeps systems healthy and tenants happy.",
     image:
-      "https://images.unsplash.com/photo-1757191462487-6c6c0fe97edd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwyfHx2YWN1dW0lMjB0cnVjayUyMGluZHVzdHJpYWx8ZW58MHx8fHwxNzgxNjQ3NzAzfDA&ixlib=rb-4.1.0&q=85",
+      "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/4jls91bw_castellontruck3.png",
     included: [
       "Pumping for tanks 1,000–3,000+ gallons (multi-trip if needed)",
       "After-hours & weekend scheduling for low-impact service",
@@ -86,7 +86,7 @@ export const SERVICE_PAGES = {
     intro:
       "A failing grease trap can shut your restaurant down, cause backups in the dining room, and result in fines from the local health department. Castellon offers scheduled grease trap pumping for restaurants, fast food, bars, cafeterias, and commercial kitchens — done on time, every time, with full documentation for compliance.",
     image:
-      "https://images.unsplash.com/photo-1552879890-3a06dd3a06c2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwzfHxpbmR1c3RyaWFsJTIwd29ya2VyJTIwc2FmZXR5JTIwZ2VhcnxlbnwwfHx8fDE3ODE2NDc3MDN8MA&ixlib=rb-4.1.0&q=85",
+      "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/q81xyr75_castellontruck2.png",
     included: [
       "Full pump-out of grease, oil, and solids",
       "Trap interior scrape & rinse",
@@ -122,7 +122,7 @@ export const SERVICE_PAGES = {
     intro:
       "A septic backup is one of the worst home or business emergencies you can have. Sewage in the basement. Standing water in the yard. Alarms going off. When you call Castellon, a real person picks up, and a truck gets dispatched — typically within hours. We keep emergency capacity reserved every working day for situations like yours.",
     image:
-      "https://images.unsplash.com/photo-1757191462578-7c59fa85b016?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwzfHx2YWN1dW0lMjB0cnVjayUyMGluZHVzdHJpYWx8ZW58MHx8fHwxNzgxNjQ3NzAzfDA&ixlib=rb-4.1.0&q=85",
+      "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/g3rg5ewk_castellontruck1.png",
     included: [
       "Same-day dispatch within our 2-hour service radius",
       "Full pump-out to relieve the backup",

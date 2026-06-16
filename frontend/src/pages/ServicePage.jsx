@@ -57,9 +57,8 @@ export default function ServicePage() {
               src={entry.image}
               alt={entry.name}
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: "78% center" }}
             />
-            <div className="absolute inset-0 bg-[var(--navy)]/25" />
+            <div className="absolute inset-0 bg-[var(--navy)]/10" />
             <div className="absolute bottom-4 left-4 right-4 font-display text-white text-3xl leading-none">
               {entry.short}<br />Service
             </div>
