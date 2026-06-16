@@ -32,7 +32,7 @@ export function formatApiError(detail) {
 
 export const PHONE = "509-389-6138";
 export const PHONE_HREF = "tel:+15093896138";
-export const COMPANY = "Catellon Septic Services";
+export const COMPANY = "Castellon Septic Services";
 
 export const SERVICES = [
   {

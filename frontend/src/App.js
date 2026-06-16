@@ -27,7 +27,7 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
-          <Toaster theme="dark" position="top-right" richColors />
+          <Toaster theme="light" position="top-right" richColors />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/book" element={<Book />} />

@@ -31,33 +31,33 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6" data-testid="admin-login-page">
+    <div className="min-h-screen flex items-center justify-center px-6 bg-cream" data-testid="admin-login-page">
       <div className="w-full max-w-md">
         <div className="flex items-center gap-3 mb-8 justify-center">
-          <div className="w-12 h-12 bg-[var(--amber)] flex items-center justify-center">
-            <Truck className="w-7 h-7 text-[#0a0f1a]" strokeWidth={2.5} />
+          <div className="w-12 h-12 bg-navy flex items-center justify-center">
+            <Truck className="w-7 h-7 text-[var(--amber)]" strokeWidth={2.5} />
           </div>
           <div>
-            <div className="font-display text-3xl tracking-wider">Catellon</div>
-            <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground-2 -mt-1">Owner Portal</div>
+            <div className="font-display text-3xl tracking-wider text-navy">Castellon</div>
+            <div className="font-mono-tiny text-[10px] text-[var(--muted)] -mt-1">OWNER PORTAL</div>
           </div>
         </div>
 
-        <div className="border border-heavy bg-surface p-8">
+        <div className="border-2 border-navy bg-white p-8 shadow-[8px_8px_0_var(--amber)]">
           <div className="flex items-center gap-2 mb-6">
-            <Lock className="w-4 h-4 text-[var(--amber)]" />
-            <h1 className="font-display text-2xl tracking-wider">Sign In</h1>
+            <Lock className="w-4 h-4 text-navy" />
+            <h1 className="font-display text-2xl tracking-wider text-navy">Sign In</h1>
           </div>
           <form onSubmit={submit} className="space-y-4" data-testid="admin-login-form">
             <div>
-              <label className="block font-display text-sm tracking-widest text-muted-foreground-2 mb-2">Email</label>
+              <label className="block font-mono-tiny text-[11px] text-[var(--muted)] mb-2">EMAIL</label>
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} data-testid="admin-email" autoComplete="email" required />
             </div>
             <div>
-              <label className="block font-display text-sm tracking-widest text-muted-foreground-2 mb-2">Password</label>
+              <label className="block font-mono-tiny text-[11px] text-[var(--muted)] mb-2">PASSWORD</label>
               <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} data-testid="admin-password" autoComplete="current-password" required />
             </div>
-            <button type="submit" className="btn-amber w-full inline-flex items-center justify-center gap-2 disabled:opacity-50" disabled={loading} data-testid="admin-login-submit">
+            <button type="submit" className="btn-amber w-full justify-center gap-2 disabled:opacity-50" disabled={loading} data-testid="admin-login-submit">
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
               Sign In
             </button>
@@ -65,7 +65,7 @@ export default function AdminLogin() {
         </div>
 
         <div className="text-center mt-6">
-          <a href="/" className="text-sm text-muted-foreground-2 hover:text-[var(--amber)]" data-testid="admin-back-home">
+          <a href="/" className="text-sm text-[var(--muted)] hover:text-navy" data-testid="admin-back-home">
             ← Back to website
           </a>
         </div>
