@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import {
   Phone, Truck, Shield, HardHat, Gauge, MapPin, Clock, AlertTriangle, Wrench,
-  Building2, Home, Utensils, Siren, CheckCircle2, Star, ArrowRight,
+  Building2, Home, Utensils, Siren, CheckCircle2, Star, ArrowRight, TrendingUp, ShieldCheck,
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import FloatingCTAs from "@/components/FloatingCTAs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PHONE, PHONE_HREF } from "@/lib/api";
+import { SERVICE_LIST } from "@/data/services";
+import { AREA_LIST } from "@/data/areas";
 
 const HERO_IMG =
   "https://images.unsplash.com/photo-1757191462578-7c59fa85b016?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwzfHx2YWN1dW0lMjB0cnVjayUyMGluZHVzdHJpYWx8ZW58MHx8fHwxNzgxNjQ3NzAzfDA&ixlib=rb-4.1.0&q=85";
@@ -39,10 +41,7 @@ const FAQS = [
   { q: "How quickly can you respond?", a: "Standard service is typically booked within 24–72 hours. Emergency calls are dispatched the same day, often within hours, depending on truck availability and your location." },
 ];
 
-const SERVICE_AREAS = {
-  WA: ["Spokane", "Spokane Valley", "Cheney", "Airway Heights", "Deer Park", "Colville", "Pullman"],
-  ID: ["Coeur d'Alene", "Post Falls", "Hayden", "Rathdrum", "Sandpoint"],
-};
+// Service areas now live in @/data/areas.js (AREA_LIST)
 
 export default function Landing() {
   return (
@@ -160,23 +159,30 @@ export default function Landing() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {SERVICES.map((s, i) => (
-              <div key={s.key} className="service-card p-6 lg:p-7" data-testid={`service-card-${s.key}`}>
-                <div className="w-14 h-14 bg-[var(--cream)] border-2 border-[var(--border-strong)] flex items-center justify-center mb-5">
-                  <s.icon className="w-7 h-7 text-[var(--navy)]" strokeWidth={2} />
-                </div>
-                <div className="font-mono-tiny text-[10px] text-[var(--muted)] mb-2">0{i + 1} / 04</div>
-                <h3 className="font-display text-2xl mb-3 leading-tight text-navy">{s.title}</h3>
-                <p className="text-sm text-[var(--muted)] leading-relaxed">{s.desc}</p>
+            {SERVICES.map((s, i) => {
+              const slug = SERVICE_LIST.find((x) => x.key === s.key)?.slug || s.key;
+              return (
                 <Link
-                  to={`/book?service=${s.key}`}
-                  className="mt-5 inline-flex items-center gap-1 font-display text-base tracking-wider text-navy hover:text-[var(--amber)] hover:gap-3 transition-all"
-                  data-testid={`service-cta-${s.key}`}
+                  key={s.key}
+                  to={`/services/${slug}`}
+                  className="service-card p-6 lg:p-7 block"
+                  data-testid={`service-card-${s.key}`}
                 >
-                  Book This Service <ArrowRight className="w-4 h-4" />
+                  <div className="w-14 h-14 bg-[var(--cream)] border-2 border-[var(--border-strong)] flex items-center justify-center mb-5">
+                    <s.icon className="w-7 h-7 text-[var(--navy)]" strokeWidth={2} />
+                  </div>
+                  <div className="font-mono-tiny text-[10px] text-[var(--muted)] mb-2">0{i + 1} / 04</div>
+                  <h3 className="font-display text-2xl mb-3 leading-tight text-navy">{s.title}</h3>
+                  <p className="text-sm text-[var(--muted)] leading-relaxed">{s.desc}</p>
+                  <div
+                    className="mt-5 inline-flex items-center gap-1 font-display text-base tracking-wider text-navy group-hover:text-[var(--amber)] transition-all"
+                    data-testid={`service-cta-${s.key}`}
+                  >
+                    Learn More <ArrowRight className="w-4 h-4" />
+                  </div>
                 </Link>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -196,10 +202,12 @@ export default function Landing() {
               <div className="bg-white border-2 border-[var(--border-strong)] p-5">
                 <div className="font-display text-2xl text-navy mb-3 border-b-2 border-[var(--amber)] pb-1 inline-block">WASHINGTON</div>
                 <ul className="space-y-1.5 text-sm">
-                  {SERVICE_AREAS.WA.map((c) => (
-                    <li key={c} className="flex items-center gap-2 text-navy">
-                      <MapPin className="w-3.5 h-3.5 text-[var(--amber)]" />
-                      {c}
+                  {AREA_LIST.filter((a) => a.state === "WA").map((a) => (
+                    <li key={a.slug}>
+                      <Link to={`/areas/${a.slug}`} className="flex items-center gap-2 text-navy hover:text-[var(--amber)] transition" data-testid={`area-link-${a.slug}`}>
+                        <MapPin className="w-3.5 h-3.5 text-[var(--amber)]" />
+                        {a.city}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -207,10 +215,12 @@ export default function Landing() {
               <div className="bg-white border-2 border-[var(--border-strong)] p-5">
                 <div className="font-display text-2xl text-navy mb-3 border-b-2 border-[var(--amber)] pb-1 inline-block">NORTH IDAHO</div>
                 <ul className="space-y-1.5 text-sm">
-                  {SERVICE_AREAS.ID.map((c) => (
-                    <li key={c} className="flex items-center gap-2 text-navy">
-                      <MapPin className="w-3.5 h-3.5 text-[var(--amber)]" />
-                      {c}
+                  {AREA_LIST.filter((a) => a.state === "ID").map((a) => (
+                    <li key={a.slug}>
+                      <Link to={`/areas/${a.slug}`} className="flex items-center gap-2 text-navy hover:text-[var(--amber)] transition" data-testid={`area-link-${a.slug}`}>
+                        <MapPin className="w-3.5 h-3.5 text-[var(--amber)]" />
+                        {a.city}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -273,6 +283,83 @@ export default function Landing() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* THE REAL COST — original framing, education over fear */}
+      <section className="py-24 bg-cream relative overflow-hidden" data-testid="real-cost-section">
+        <div className="absolute inset-0 topo-bg opacity-50" />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="max-w-3xl mb-12">
+            <div className="eyebrow mb-3">DO THE MATH</div>
+            <h2 className="font-display text-4xl md:text-6xl text-navy mb-5">Routine Pumping Isn&apos;t An Expense. It&apos;s Insurance.</h2>
+            <p className="text-[var(--muted)] leading-relaxed text-lg">
+              Most homeowners think of septic pumping as a cost. They&apos;re looking at it wrong. Here&apos;s what skipping it actually adds up to in Spokane County.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                tier: "01",
+                title: "Routine Pump-Out",
+                price: "What it costs",
+                note: "Every 3–5 years",
+                color: "navy",
+                desc: "A scheduled pump-out from Castellon is the cheapest thing you'll ever do to your septic system. We pump it, inspect baffles, and you go another few years without thinking about it.",
+              },
+              {
+                tier: "02",
+                title: "Emergency Pump-Out",
+                price: "2–3× the routine",
+                note: "When you wait too long",
+                color: "amber",
+                desc: "Backup in the basement. Standing water in the yard. Caught early enough, an emergency pump-out solves the immediate problem — but it costs significantly more than scheduled service.",
+              },
+              {
+                tier: "03",
+                title: "Drain Field Replacement",
+                price: "$20,000 – $40,000",
+                note: "What it costs to ignore the problem",
+                color: "red",
+                desc: "Once sludge overflows the tank and saturates your drain field, the soil is contaminated. The fix isn't pumping — it's installing a brand new drain field. Heavy equipment, permits, weeks of disruption.",
+              },
+            ].map((card) => (
+              <div
+                key={card.tier}
+                className={`relative bg-white border-2 p-7 ${card.color === "red" ? "border-[var(--red)]" : "border-[var(--border-strong)]"}`}
+                data-testid={`cost-card-${card.tier}`}
+              >
+                <div className="font-mono-tiny text-[11px] text-[var(--muted)] mb-3">TIER {card.tier}</div>
+                <div className="font-display text-2xl text-navy mb-2">{card.title}</div>
+                <div className={`font-display text-4xl md:text-5xl mb-1 ${card.color === "red" ? "text-[var(--red)]" : card.color === "amber" ? "text-[var(--amber)]" : "text-navy"}`}>
+                  {card.price}
+                </div>
+                <div className="font-mono-tiny text-[10px] text-[var(--muted)] mb-4">{card.note.toUpperCase()}</div>
+                <p className="text-sm text-[var(--muted)] leading-relaxed">{card.desc}</p>
+                {card.color === "red" && (
+                  <div className="absolute -top-3 -right-3 bg-[var(--red)] text-white px-3 py-1 font-mono-tiny text-[10px]">DON&apos;T LET IT GET HERE</div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 border-l-4 border-[var(--amber)] bg-white pl-6 pr-5 py-5 max-w-3xl flex items-center gap-4" data-testid="cost-callout">
+            <TrendingUp className="w-8 h-8 text-[var(--amber)] shrink-0" strokeWidth={2} />
+            <div>
+              <div className="font-display text-xl text-navy">The math is simple.</div>
+              <div className="text-sm text-[var(--muted)] mt-0.5">A pump-out every few years is the cheapest insurance policy you&apos;ll ever buy. Castellon makes it easy — book a slot online and stay ahead of it.</div>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link to="/book" className="btn-amber gap-2" data-testid="cost-book-btn">
+              <ShieldCheck className="w-4 h-4" /> Schedule Preventative Service
+            </Link>
+            <a href={PHONE_HREF} className="btn-outline-navy gap-2">
+              <Phone className="w-4 h-4" /> Talk To A Real Person
+            </a>
           </div>
         </div>
       </section>

@@ -8,6 +8,8 @@ import Book from "@/pages/Book";
 import Quote from "@/pages/Quote";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
+import ServicePage from "@/pages/ServicePage";
+import AreaPage from "@/pages/AreaPage";
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -32,6 +34,8 @@ export default function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/book" element={<Book />} />
             <Route path="/quote" element={<Quote />} />
+            <Route path="/services/:slug" element={<ServicePage />} />
+            <Route path="/areas/:slug" element={<AreaPage />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route
               path="/admin"

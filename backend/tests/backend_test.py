@@ -5,7 +5,7 @@ from datetime import date, timedelta
 
 BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://vacuum-pro-spokane.preview.emergentagent.com").rstrip("/")
 API = f"{BASE_URL}/api"
-ADMIN_EMAIL = "admin@catellon.com"
+ADMIN_EMAIL = "admin@castellon.com"
 ADMIN_PASSWORD = "Catellon2026!"
 
 
