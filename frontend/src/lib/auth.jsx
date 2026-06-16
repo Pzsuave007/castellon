@@ -8,10 +8,17 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
+    const hasToken = !!localStorage.getItem("catellon_token");
+    if (!hasToken) {
+      setUser(false);
+      setLoading(false);
+      return;
+    }
     try {
       const { data } = await api.get("/auth/me");
       setUser(data);
     } catch {
+      localStorage.removeItem("catellon_token");
       setUser(false);
     } finally {
       setLoading(false);
