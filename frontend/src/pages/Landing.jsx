@@ -11,12 +11,9 @@ import { PHONE, PHONE_HREF } from "@/lib/api";
 import { SERVICE_LIST } from "@/data/services";
 import { AREA_LIST } from "@/data/areas";
 
-const HERO_IMG =
-  "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/g3rg5ewk_castellontruck1.png";
-const COMMERCIAL_IMG =
-  "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/4jls91bw_castellontruck3.png";
-const SAFETY_IMG =
-  "https://customer-assets.emergentagent.com/job_vacuum-pro-spokane/artifacts/q81xyr75_castellontruck2.png";
+const HERO_IMG = "/truck-rear.png";
+const COMMERCIAL_IMG = "/truck-front.png";
+const SAFETY_IMG = "/truck-side.png";
 
 const SERVICES = [
   { icon: Home, title: "Residential Septic Pumping", desc: "Rural homes, manufactured homes, farms, and properties outside city sewer. Preventative maintenance that avoids costly backups.", key: "residential" },
