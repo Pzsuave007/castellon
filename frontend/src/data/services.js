@@ -13,7 +13,7 @@ export const SERVICE_PAGES = {
     headline: "Reliable Septic Pumping For Homes Across Eastern WA & North Idaho",
     intro:
       "If your home runs on a septic system instead of city sewer, regular pumping isn't optional — it's the single best thing you can do to protect your drain field and your wallet. Our 1,800-gallon vacuum truck handles standard residential tanks (1,000–2,000 gal) in a single trip, no second visit needed.",
-    image: "/truck-rear.png",
+    image: "/rural-home.jpg",
     included: [
       "Full tank pump-out (down to the bottom solids layer)",
       "Sludge & scum layer measurement",
@@ -48,7 +48,7 @@ export const SERVICE_PAGES = {
     headline: "Professional Commercial Septic Service Built For Volume.",
     intro:
       "Apartment complexes, hotels, gas stations, warehouses, and industrial facilities all share one thing: a septic backup at your property is a business interruption you cannot afford. Castellon runs a scheduled commercial program designed around your operating hours, with reliable pumping that keeps systems healthy and tenants happy.",
-    image: "/truck-front.png",
+    image: "/apartments.jpg",
     included: [
       "Pumping for tanks 1,000–3,000+ gallons (multi-trip if needed)",
       "After-hours & weekend scheduling for low-impact service",
@@ -83,7 +83,7 @@ export const SERVICE_PAGES = {
     headline: "Grease Trap Pumping That Keeps Inspectors Happy.",
     intro:
       "A failing grease trap can shut your restaurant down, cause backups in the dining room, and result in fines from the local health department. Castellon offers scheduled grease trap pumping for restaurants, fast food, bars, cafeterias, and commercial kitchens — done on time, every time, with full documentation for compliance.",
-    image: "/truck-side.png",
+    image: "/kitchen.jpg",
     included: [
       "Full pump-out of grease, oil, and solids",
       "Trap interior scrape & rinse",
@@ -145,3 +145,4 @@ export const SERVICE_PAGES = {
 };
 
 export const SERVICE_LIST = Object.values(SERVICE_PAGES);
+
