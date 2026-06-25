@@ -14,8 +14,8 @@ export default function SiteFooter() {
       </div>
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 grid md:grid-cols-2 lg:grid-cols-5 gap-10 text-white">
         <div className="lg:col-span-2">
-          <Link to="/" className="inline-block mb-4 bg-white p-3 border-2 border-white">
-            <img src="/logo.png" alt="Castellon Septic Services" className="h-20 w-auto" />
+          <Link to="/" className="inline-block mb-4">
+            <img src="/logo-light.png" alt="Castellon Septic Services" className="h-20 w-auto" />
           </Link>
           <p className="text-white/70 text-sm leading-relaxed mb-5 max-w-sm">
             Professional septic & grease pumping serving Eastern Washington and North Idaho with a 1,800-gallon
