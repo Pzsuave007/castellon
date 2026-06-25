@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Lock, Loader2, Truck } from "lucide-react";
+import { Lock, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/lib/auth";
 import { formatApiError } from "@/lib/api";
@@ -33,14 +33,8 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen flex items-center justify-center px-6 bg-cream" data-testid="admin-login-page">
       <div className="w-full max-w-md">
-        <div className="flex items-center gap-3 mb-8 justify-center">
-          <div className="w-12 h-12 bg-navy flex items-center justify-center">
-            <Truck className="w-7 h-7 text-[var(--amber)]" strokeWidth={2.5} />
-          </div>
-          <div>
-            <div className="font-display text-3xl tracking-wider text-navy">Castellon</div>
-            <div className="font-mono-tiny text-[10px] text-[var(--muted)] -mt-1">OWNER PORTAL</div>
-          </div>
+        <div className="flex items-center justify-center mb-6">
+          <img src="/logo.png" alt="Castellon Septic Services" className="h-24 w-auto" />
         </div>
 
         <div className="border-2 border-navy bg-white p-8 shadow-[8px_8px_0_var(--amber)]">

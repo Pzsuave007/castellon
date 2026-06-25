@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
   CalendarDays, Inbox, Settings, LogOut, ChevronLeft, ChevronRight, Trash2,
-  CheckCircle2, Clock, Truck, X, Phone, MapPin, RefreshCw, Loader2,
+  CheckCircle2, Clock, X, Phone, MapPin, RefreshCw, Loader2,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { api, SERVICE_BY_KEY, SERVICES, formatApiError } from "@/lib/api";
@@ -141,9 +141,7 @@ export default function AdminDashboard() {
       <header className="bg-white border-b-2 border-navy">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-navy flex items-center justify-center">
-              <Truck className="w-6 h-6 text-[var(--amber)]" strokeWidth={2.5} />
-            </div>
+            <img src="/logo-mark.png" alt="Castellon" className="h-12 w-auto" />
             <div>
               <div className="font-display text-xl tracking-wider text-navy">Castellon Admin</div>
               <div className="text-xs text-[var(--muted)]">{user?.email}</div>

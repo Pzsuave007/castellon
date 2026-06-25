@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, MapPin, Mail, Truck } from "lucide-react";
+import { Phone, MapPin, Mail } from "lucide-react";
 import { PHONE, PHONE_HREF, COMPANY } from "@/lib/api";
 import { AREA_LIST } from "@/data/areas";
 import { SERVICE_LIST } from "@/data/services";
@@ -14,12 +14,9 @@ export default function SiteFooter() {
       </div>
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 grid md:grid-cols-2 lg:grid-cols-5 gap-10 text-white">
         <div className="lg:col-span-2">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-11 h-11 bg-[var(--amber)] flex items-center justify-center">
-              <Truck className="w-6 h-6 text-[var(--navy)]" strokeWidth={2.5} />
-            </div>
-            <div className="font-display text-2xl">{COMPANY.split(" ")[0]}</div>
-          </div>
+          <Link to="/" className="inline-block mb-4 bg-white p-3 border-2 border-white">
+            <img src="/logo.png" alt="Castellon Septic Services" className="h-20 w-auto" />
+          </Link>
           <p className="text-white/70 text-sm leading-relaxed mb-5 max-w-sm">
             Professional septic & grease pumping serving Eastern Washington and North Idaho with a 1,800-gallon
             vacuum truck and a crew that shows up on time.
