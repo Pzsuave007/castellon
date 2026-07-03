@@ -5,7 +5,7 @@
 set -e
 
 CPANEL_USER="castellon"
-PORT=8007
+PORT=8011
 PROD="/opt/${CPANEL_USER}/backend"
 
 RESTART="/home/${CPANEL_USER}/restart.sh"

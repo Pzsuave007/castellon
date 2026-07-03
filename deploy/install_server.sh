@@ -6,7 +6,7 @@
 set -e
 
 CPANEL_USER="castellon"
-PORT=8007
+PORT=8011
 DOMAIN="castellonsepticservices.com"
 
 REPO="/home/${CPANEL_USER}/repo"

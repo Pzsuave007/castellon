@@ -1,6 +1,6 @@
 # Apache .htaccess for Castellon Septic Services
 # - Force HTTPS
-# - Proxy /api/* to backend on 127.0.0.1:8007
+# - Proxy /api/* to backend on 127.0.0.1:8011
 # - SPA fallback (React Router)
 
 RewriteEngine On
@@ -11,7 +11,7 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Proxy /api/* to FastAPI backend
 RewriteCond %{REQUEST_URI} ^/api
-RewriteRule ^(.*)$ http://127.0.0.1:8007/$1 [P,L]
+RewriteRule ^(.*)$ http://127.0.0.1:8011/$1 [P,L]
 
 # SPA fallback — serve index.html for any non-file, non-dir request
 RewriteCond %{REQUEST_FILENAME} !-f
