@@ -7,7 +7,7 @@
 # ============================================================
 set -e
 
-REPO_URL="https://github.com/catellon/castellon.git"
+REPO_URL="https://github.com/Pzsuave007/castellon.git"
 CPANEL_USER="castellon"
 REPO="/home/${CPANEL_USER}/repo"
 
