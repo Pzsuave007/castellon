@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Castellon">
+  <!-- Background squircle -->
+  <rect x="2" y="2" width="60" height="60" rx="6" fill="#1F3A2E"/>
+  <!-- Inner border -->
+  <rect x="5" y="5" width="54" height="54" rx="4" fill="none" stroke="#F6EFD9" stroke-width="1.2" stroke-opacity="0.3"/>
+  <!-- Truck silhouette (simplified for tiny size) -->
+  <g transform="translate(8 22)">
+    <!-- chassis -->
+    <rect x="0" y="16" width="48" height="3" fill="#F6EFD9"/>
+    <!-- tank -->
+    <rect x="1" y="3" width="32" height="14" rx="7" fill="#6BC95C" stroke="#F6EFD9" stroke-width="1.5"/>
+    <!-- cab -->
+    <path d="M34 7 L44 7 L47 12 L47 17 L34 17 Z" fill="#4A90C2" stroke="#F6EFD9" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- wheels -->
+    <circle cx="9" cy="22" r="3.5" fill="#F6EFD9"/>
+    <circle cx="9" cy="22" r="1.2" fill="#1F3A2E"/>
+    <circle cx="40" cy="22" r="3.5" fill="#F6EFD9"/>
+    <circle cx="40" cy="22" r="1.2" fill="#1F3A2E"/>
+    <!-- pipe -->
+    <rect x="14" y="0" width="2" height="4" fill="#F6EFD9"/>
+  </g>
+  <!-- "C" letter top right -->
+  <text x="32" y="14" text-anchor="middle" fill="#6BC95C"
+        font-family="'Teko','Bebas Neue',sans-serif" font-weight="700" font-size="9" letter-spacing="2">CASTELLON</text>
+</svg>
