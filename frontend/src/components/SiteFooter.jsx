@@ -14,8 +14,8 @@ export default function SiteFooter() {
       </div>
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 grid md:grid-cols-2 lg:grid-cols-5 gap-10 text-white">
         <div className="lg:col-span-2">
-          <Link to="/" className="inline-block mb-4">
-            <img src="/logo-light.png" alt="Castellon Septic Services" className="h-20 w-auto" />
+          <Link to="/" className="inline-block mb-5">
+            <img src="/logo-light.png" alt="Castellon Septic Services" className="h-32 md:h-40 w-auto" />
           </Link>
           <p className="text-white/70 text-sm leading-relaxed mb-5 max-w-sm">
             Professional septic & grease pumping serving Eastern Washington and North Idaho with a 1,800-gallon
@@ -31,7 +31,7 @@ export default function SiteFooter() {
               <MapPin className="w-4 h-4" /> Spokane, WA · HQ
             </li>
             <li className="flex items-center gap-2 text-white/75">
-              <Mail className="w-4 h-4" /> info@castellon.com
+              <Mail className="w-4 h-4" /> info@castellonsepticservices.com
             </li>
           </ul>
         </div>
