@@ -7,7 +7,7 @@
 # ============================================================
 set -e
 
-REPO_URL="https://github.com/Pzsuave007/castellon-septic.git"
+REPO_URL="https://github.com/catellon/vacuum-pro-spokane.git"
 CPANEL_USER="castellon"
 REPO="/home/${CPANEL_USER}/repo"
 
