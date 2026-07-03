@@ -7,7 +7,7 @@
 set -e
 
 # ============ AJUSTA ESTAS 4 VARIABLES ============
-REPO_URL="https://github.com/catellon/vacuum-pro-spokane.git"
+REPO_URL="https://github.com/catellon/castellon.git"
 CPANEL_USER="castellon"
 PORT=8011
 DOMAIN="castellonsepticservices.com"
