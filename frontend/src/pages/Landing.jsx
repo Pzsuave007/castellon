@@ -34,7 +34,7 @@ const FAQS = [
   { q: "How much does septic pumping cost?", a: "Pricing varies by tank size, location, and accessibility. Most residential pump-outs in the Spokane area fall in a competitive market range. Call 509-655-6480 or request a quote and we'll give you a transparent estimate — no hidden fees." },
   { q: "How often should restaurants clean grease traps?", a: "Most municipalities require grease trap cleaning every 30–90 days depending on size and volume. Failing to maintain a schedule can result in fines and code violations. We offer monthly maintenance contracts to keep you compliant." },
   { q: "Do you offer emergency service?", a: "Yes. We dispatch the same day for septic backups and emergency pump-outs throughout our service radius. Call us directly at 509-655-6480 for fastest response." },
-  { q: "What areas do you serve?", a: "We serve Spokane and Eastern Washington within a 2-hour radius of Spokane — including Spokane Valley, Cheney, Airway Heights, Deer Park, Colville, and Pullman." },
+  { q: "What areas do you serve?", a: "We serve Spokane and Eastern Washington within a 2-hour radius of Spokane — including Spokane Valley, Airway Heights, Cheney, Deer Park, Chewelah, Colville, Newport, Pullman, Colfax, and Moses Lake." },
   { q: "How quickly can you respond?", a: "Standard service is typically booked within 24–72 hours. Emergency calls are dispatched the same day, often within hours, depending on truck availability and your location." },
 ];
 
