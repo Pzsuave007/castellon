@@ -58,5 +58,5 @@ Premium high-converting website + booking platform for Castellon Septic Services
 - **P3**: Recurring maintenance contract management (auto-schedule quarterly grease-trap visits)
 
 ## Test Credentials
-- Admin: `admin@castellonsepticservices.com` / `Catellon2026!` (fallback: `admin@catellon.com`)
+- Admin: `admin@castellonsepticservices.com` / `Castellon2026!`
 

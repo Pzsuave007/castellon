@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
-    const hasToken = !!localStorage.getItem("catellon_token");
+    const hasToken = !!localStorage.getItem("castellon_token");
     if (!hasToken) {
       setUser(false);
       setLoading(false);
@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
       const { data } = await api.get("/auth/me");
       setUser(data);
     } catch {
-      localStorage.removeItem("catellon_token");
+      localStorage.removeItem("castellon_token");
       setUser(false);
     } finally {
       setLoading(false);
@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     const { data } = await api.post("/auth/login", { email, password });
-    if (data?.token) localStorage.setItem("catellon_token", data.token);
+    if (data?.token) localStorage.setItem("castellon_token", data.token);
     setUser(data.user);
     return data.user;
   };
@@ -42,7 +42,7 @@ export function AuthProvider({ children }) {
     } catch {
       /* ignore */
     }
-    localStorage.removeItem("catellon_token");
+    localStorage.removeItem("castellon_token");
     setUser(false);
   };
 

@@ -1,4 +1,4 @@
-"""Backend API tests for Catellon Septic Services."""
+"""Backend API tests for Castellon Septic Services."""
 import os
 import requests
 from datetime import date, timedelta
@@ -6,7 +6,7 @@ from datetime import date, timedelta
 BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://vacuum-pro-spokane.preview.emergentagent.com").rstrip("/")
 API = f"{BASE_URL}/api"
 ADMIN_EMAIL = "admin@castellonsepticservices.com"
-ADMIN_PASSWORD = "Catellon2026!"
+ADMIN_PASSWORD = "Castellon2026!"
 
 
 def _next_weekday(weekdays):

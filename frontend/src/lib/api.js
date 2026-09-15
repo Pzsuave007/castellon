@@ -11,7 +11,7 @@ export const api = axios.create({
 
 // Attach token from localStorage as fallback if cookie is blocked
 api.interceptors.request.use((config) => {
-  const t = localStorage.getItem("catellon_token");
+  const t = localStorage.getItem("castellon_token");
   if (t && !config.headers.Authorization) {
     config.headers.Authorization = `Bearer ${t}`;
   }

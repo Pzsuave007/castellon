@@ -29,7 +29,7 @@ db = client[os.environ["DB_NAME"]]
 JWT_ALGORITHM = "HS256"
 SERVICE_TYPES = ["residential", "commercial", "grease_trap", "emergency"]
 
-app = FastAPI(title="Catellon Septic Services API")
+app = FastAPI(title="Castellon Septic Services API")
 api = APIRouter(prefix="/api")
 
 
@@ -185,7 +185,7 @@ async def get_availability_config() -> AvailabilityConfig:
 
 @api.get("/")
 async def root():
-    return {"service": "Catellon Septic Services API", "status": "ok"}
+    return {"service": "Castellon Septic Services API", "status": "ok"}
 
 
 @api.get("/availability/config")
@@ -382,7 +382,7 @@ async def on_startup():
                 "id": str(uuid.uuid4()),
                 "email": admin_email,
                 "password_hash": hash_password(admin_password),
-                "name": "Catellon Admin",
+                "name": "Castellon Admin",
                 "role": "admin",
                 "created_at": datetime.now(timezone.utc).isoformat(),
             }

@@ -11,7 +11,7 @@ set -e
 CPANEL_USER="castellon"
 PORT=8011
 PROD="/opt/${CPANEL_USER}/backend"
-NEW_PASS="${1:-Catellon2026!}"
+NEW_PASS="${1:-Castellon2026!}"
 
 [ "$EUID" -ne 0 ] && { echo "Run as root"; exit 1; }
 [ ! -f "$PROD/.env" ] && { echo "$PROD/.env not found — run deploy.sh first"; exit 1; }
