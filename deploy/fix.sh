@@ -27,6 +27,13 @@ deactivate
 
 cp "$REPO/backend/server.py" "$PROD/server.py"
 
+# Copy any additional Python modules (notifications.py, etc.) — anything
+# alongside server.py except tests, venv, __pycache__, and .env
+for f in "$REPO"/backend/*.py; do
+    [ -f "$f" ] || continue
+    cp "$f" "$PROD/"
+done
+
 # ---------- FRONTEND ----------
 if [ -d "$REPO/frontend/build" ]; then
     echo ">>> [fix] Copying frontend build..."
