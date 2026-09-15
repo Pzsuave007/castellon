@@ -12,7 +12,7 @@ RESTART="/home/${CPANEL_USER}/restart.sh"
 
 cat > "$RESTART" <<EOF
 #!/bin/bash
-pkill -f "uvicorn.*:${PORT}" 2>/dev/null || true
+lsof -ti:${PORT} 2>/dev/null | xargs -r kill -9 2>/dev/null || true
 sleep 1
 cd ${PROD}
 nohup ${PROD}/venv/bin/uvicorn server:app \\

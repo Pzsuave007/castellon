@@ -48,7 +48,7 @@ fi
 
 # ---------- RESTART BACKEND ----------
 echo ">>> [fix] Restarting backend on port $PORT..."
-pkill -f "uvicorn.*:${PORT}" 2>/dev/null || true
+lsof -ti:${PORT} 2>/dev/null | xargs -r kill -9 2>/dev/null || true
 sleep 1
 
 cd "$PROD"

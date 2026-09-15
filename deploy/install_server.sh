@@ -53,7 +53,7 @@ echo ">>> [install_server] Frontend copied to $PUBLIC_HTML"
 
 # ---------- START BACKEND ----------
 # Kill any old uvicorn on our port
-pkill -f "uvicorn.*:${PORT}" 2>/dev/null || true
+lsof -ti:${PORT} 2>/dev/null | xargs -r kill -9 2>/dev/null || true
 sleep 1
 
 cd "$PROD"

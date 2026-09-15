@@ -38,7 +38,7 @@ set_var SMTP_PORT "25"
 
 echo ""
 echo ">>> Restarting backend on port $PORT..."
-pkill -f "uvicorn.*:${PORT}" 2>/dev/null || true
+lsof -ti:${PORT} 2>/dev/null | xargs -r kill -9 2>/dev/null || true
 sleep 1
 
 su -s /bin/bash -l "$CPANEL_USER" -c "
