@@ -1,14 +1,14 @@
 """Owner email notifications for Castellon Septic Services.
 
-Primary transport: /usr/sbin/sendmail -t -i (works out-of-the-box on cPanel/Exim
-without requiring a real mailbox for the From: address).
-
-Fallback: smtplib on localhost:25 (only used if the sendmail binary is missing).
+Primary transport: Resend API (transactional email service — reliable delivery).
+Fallbacks: local sendmail binary, then unauthenticated smtplib (only if
+RESEND_API_KEY is not set).
 
 Non-blocking: any failure is captured, logged, and returned in a diagnostic
 dict — the caller never raises.
 """
 import os
+import asyncio
 import shutil
 import smtplib
 import subprocess
@@ -25,7 +25,6 @@ SERVICE_LABELS = {
     "emergency": "Emergency Pump-Out",
 }
 
-# Common sendmail binary locations on Linux/cPanel
 SENDMAIL_PATHS = ["/usr/sbin/sendmail", "/usr/lib/sendmail", "/sbin/sendmail"]
 
 
@@ -33,12 +32,39 @@ def _enabled() -> bool:
     return os.environ.get("NOTIFY_ENABLED", "false").lower() in ("1", "true", "yes")
 
 
+# ---------- Resend transport (primary) ----------
+
+def _send_via_resend(subject: str, body: str, to_addr: str, from_addr: str) -> Tuple[bool, str]:
+    api_key = os.environ.get("RESEND_API_KEY")
+    if not api_key:
+        return False, "RESEND_API_KEY not set"
+    try:
+        import resend
+        resend.api_key = api_key
+        html_body = "<pre style=\"font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;line-height:1.5;color:#1a1a1a;\">" \
+                    + body.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;") \
+                    + "</pre>"
+        params = {
+            "from": from_addr,
+            "to": [to_addr],
+            "subject": subject,
+            "text": body,
+            "html": html_body,
+        }
+        result = resend.Emails.send(params)
+        email_id = result.get("id") if isinstance(result, dict) else str(result)
+        return True, f"resend ok id={email_id}"
+    except Exception as e:
+        return False, f"resend failed err={e!r}"
+
+
+# ---------- Sendmail transport (fallback) ----------
+
 def _find_sendmail() -> Optional[str]:
     for p in SENDMAIL_PATHS:
         if os.path.exists(p) and os.access(p, os.X_OK):
             return p
-    which = shutil.which("sendmail")
-    return which
+    return shutil.which("sendmail")
 
 
 def _build_message(subject: str, body: str, to_addr: str, from_addr: str) -> EmailMessage:
@@ -60,51 +86,18 @@ def _send_via_sendmail(msg: EmailMessage, sendmail_bin: str) -> Tuple[bool, str]
             timeout=15,
         )
         if proc.returncode == 0:
-            return True, f"sendmail exit=0 stdout={proc.stdout.decode(errors='replace')[:200]}"
+            return True, "sendmail exit=0"
         return False, f"sendmail exit={proc.returncode} stderr={proc.stderr.decode(errors='replace')[:400]}"
-    except FileNotFoundError:
-        return False, f"sendmail binary not found at {sendmail_bin}"
-    except subprocess.TimeoutExpired:
-        return False, "sendmail timed out after 15s"
     except Exception as e:
         return False, f"sendmail exception: {e!r}"
 
 
-def _send_via_smtplib(msg: EmailMessage) -> Tuple[bool, str]:
-    """Send using smtplib. If SMTP_USER + SMTP_PASSWORD are set, use authenticated
-    SMTP over STARTTLS (port 587) or SSL (port 465). Otherwise falls back to
-    unauthenticated plain SMTP.
-    """
-    host = os.environ.get("SMTP_HOST", "localhost")
-    port = int(os.environ.get("SMTP_PORT", "25"))
-    user = os.environ.get("SMTP_USER")
-    password = os.environ.get("SMTP_PASSWORD")
-    use_ssl = os.environ.get("SMTP_USE_SSL", "false").lower() in ("1", "true", "yes")
-
-    try:
-        if use_ssl or port == 465:
-            with smtplib.SMTP_SSL(host, port, timeout=15) as s:
-                if user and password:
-                    s.login(user, password)
-                s.send_message(msg)
-            return True, f"smtplib SSL ok host={host}:{port} auth={'yes' if user else 'no'}"
-        else:
-            with smtplib.SMTP(host, port, timeout=15) as s:
-                s.ehlo()
-                if user and password:
-                    s.starttls()
-                    s.ehlo()
-                    s.login(user, password)
-                s.send_message(msg)
-            return True, f"smtplib ok host={host}:{port} auth={'yes' if user else 'no'}"
-    except Exception as e:
-        return False, f"smtplib failed host={host}:{port} err={e!r}"
-
+# ---------- Public API ----------
 
 def _send(subject: str, body: str) -> dict:
     """Send email. Returns diagnostic dict {ok, transport, detail}."""
     to_addr = os.environ.get("NOTIFY_EMAIL")
-    from_addr = os.environ.get("NOTIFY_FROM", "no-reply@castellonsepticservices.com")
+    from_addr = os.environ.get("NOTIFY_FROM", "onboarding@resend.dev")
 
     if not _enabled():
         logger.info("[notify] disabled — skipping: %s", subject)
@@ -113,43 +106,31 @@ def _send(subject: str, body: str) -> dict:
         logger.warning("[notify] NOTIFY_EMAIL not set — skipping: %s", subject)
         return {"ok": False, "transport": None, "detail": "NOTIFY_EMAIL not set"}
 
-    msg = _build_message(subject, body, to_addr, from_addr)
-
-    # If SMTP credentials are set, prefer authenticated SMTP (bulletproof).
-    # Otherwise fall back to local sendmail, then to unauthenticated SMTP.
-    if os.environ.get("SMTP_USER") and os.environ.get("SMTP_PASSWORD"):
-        ok, detail = _send_via_smtplib(msg)
+    # 1) Try Resend first (bulletproof, no DNS drama)
+    if os.environ.get("RESEND_API_KEY"):
+        ok, detail = _send_via_resend(subject, body, to_addr, from_addr)
         if ok:
-            logger.info("[notify] sent via authenticated SMTP -> %s (%s)", to_addr, subject)
-            return {"ok": True, "transport": "smtplib (auth)", "detail": detail}
-        logger.warning("[notify] authenticated SMTP failed: %s", detail)
-        first_err = detail
+            logger.info("[notify] sent via Resend -> %s (%s)", to_addr, subject)
+            return {"ok": True, "transport": "resend", "detail": detail}
+        logger.warning("[notify] Resend failed, trying sendmail: %s", detail)
+        resend_err = detail
     else:
-        first_err = None
+        resend_err = "RESEND_API_KEY not set"
 
-    # Try sendmail binary
+    # 2) Fallback to local sendmail binary
+    msg = _build_message(subject, body, to_addr, from_addr)
     sendmail_bin = _find_sendmail()
     if sendmail_bin:
         ok, detail = _send_via_sendmail(msg, sendmail_bin)
         if ok:
             logger.info("[notify] sent via sendmail -> %s (%s)", to_addr, subject)
             return {"ok": True, "transport": f"sendmail ({sendmail_bin})", "detail": detail}
-        logger.warning("[notify] sendmail failed: %s", detail)
         sendmail_err = detail
     else:
         sendmail_err = "no sendmail binary found"
-        logger.warning("[notify] %s", sendmail_err)
 
-    # Last resort: unauthenticated smtplib (only if we didn't already try authenticated)
-    if not first_err:
-        ok, detail = _send_via_smtplib(msg)
-        if ok:
-            logger.info("[notify] sent via smtplib -> %s (%s)", to_addr, subject)
-            return {"ok": True, "transport": "smtplib", "detail": detail}
-        first_err = detail
-
-    logger.error("[notify] all transports failed: smtp_auth=%s | sendmail=%s", first_err, sendmail_err)
-    return {"ok": False, "transport": None, "detail": f"smtp_auth={first_err} | sendmail={sendmail_err}"}
+    logger.error("[notify] all transports failed: resend=%s | sendmail=%s", resend_err, sendmail_err)
+    return {"ok": False, "transport": None, "detail": f"resend={resend_err} | sendmail={sendmail_err}"}
 
 
 def notify_new_booking(b: dict) -> dict:
@@ -214,8 +195,7 @@ def diagnostics() -> dict:
     return {
         "enabled": _enabled(),
         "notify_email": os.environ.get("NOTIFY_EMAIL"),
-        "notify_from": os.environ.get("NOTIFY_FROM", "no-reply@castellonsepticservices.com"),
-        "smtp_host": os.environ.get("SMTP_HOST", "localhost"),
-        "smtp_port": os.environ.get("SMTP_PORT", "25"),
+        "notify_from": os.environ.get("NOTIFY_FROM", "onboarding@resend.dev"),
+        "resend_configured": bool(os.environ.get("RESEND_API_KEY")),
         "sendmail_binary": _find_sendmail(),
     }
