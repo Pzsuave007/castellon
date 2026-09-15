@@ -45,6 +45,19 @@ Premium high-converting website + booking platform for Castellon Septic Services
 - Updated phone number site-wide from `509-389-6138` → `509-655-6480`
 - Service Area section restructured to Washington-only (Spokane, Spokane Valley, Cheney, Deer Park)
 - Updated meta description, title, FAQ, reviews, and all copy to reflect Eastern Washington only
+- Added 7 new SEO city pages: Airway Heights, Chewelah, Colville, Newport, Pullman, Colfax, Moses Lake
+- Fixed brand typo: `Catellon` → `Castellon` across all files (password, tests, localStorage keys, API titles)
+
+### 2026-02-15 (email notifications)
+- Implemented owner email notifications via **Resend API** (Python SDK)
+- Triggers: new booking (regular + emergency), new quote request
+- Non-blocking via FastAPI `BackgroundTasks` — email failure never breaks the API
+- Fallbacks: local sendmail binary → unauthenticated smtplib (only if RESEND_API_KEY unset)
+- Diagnostic endpoint: `POST /api/admin/notify/test` returns full transport + detail
+- Env vars: `NOTIFY_ENABLED`, `NOTIFY_EMAIL`, `NOTIFY_FROM`, `RESEND_API_KEY`
+- Deploy scripts: `setup-notifications.sh`, `sync-backend.sh`, `test-notify.sh`, `reset-admin.sh` — all use `lsof -ti:8011` to reliably kill the old uvicorn process
+- Domain `castellonsepticservices.com` verified in Resend (SPF+DKIM+DMARC)
+- Tested end-to-end in preview + production — email delivers to inbox instantly
 
 ## Prioritized Backlog
 - **P1**: Email notifications on new booking & new quote (Resend) — needs API key
