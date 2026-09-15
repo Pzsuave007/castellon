@@ -12,10 +12,12 @@ import jwt
 from datetime import datetime, timezone, timedelta, time as dt_time, date as date_cls
 from typing import List, Optional, Literal
 
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, Request, Response
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Request, Response, BackgroundTasks
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
+
+from notifications import notify_new_booking, notify_new_quote, notify_test
 
 
 # ============================================================================
@@ -215,7 +217,7 @@ async def get_available_slots(date: str, service_type: Optional[str] = None):
 
 
 @api.post("/bookings", response_model=Booking)
-async def create_booking(payload: BookingCreate):
+async def create_booking(payload: BookingCreate, background: BackgroundTasks):
     # Validate slot still available
     cfg = await get_availability_config()
     try:
@@ -234,13 +236,15 @@ async def create_booking(payload: BookingCreate):
 
     booking = Booking(**payload.model_dump())
     await db.bookings.insert_one(booking.model_dump())
+    background.add_task(notify_new_booking, booking.model_dump())
     return booking
 
 
 @api.post("/quotes", response_model=QuoteRequest)
-async def create_quote(payload: QuoteRequestCreate):
+async def create_quote(payload: QuoteRequestCreate, background: BackgroundTasks):
     q = QuoteRequest(**payload.model_dump())
     await db.quotes.insert_one(q.model_dump())
+    background.add_task(notify_new_quote, q.model_dump())
     return q
 
 
@@ -344,6 +348,18 @@ async def update_availability(cfg: AvailabilityConfig, _: dict = Depends(get_cur
 async def get_admin_availability(_: dict = Depends(get_current_admin)):
     cfg = await get_availability_config()
     return cfg.model_dump()
+
+
+@api.post("/admin/notify/test")
+async def send_test_notification(_: dict = Depends(get_current_admin)):
+    """Trigger a test email so the owner can confirm notifications are working."""
+    ok = notify_test()
+    return {
+        "ok": ok,
+        "enabled": os.environ.get("NOTIFY_ENABLED", "false").lower() in ("1", "true", "yes"),
+        "to": os.environ.get("NOTIFY_EMAIL"),
+        "from": os.environ.get("NOTIFY_FROM", "no-reply@castellonsepticservices.com"),
+    }
 
 
 # ============================================================================
