@@ -1,10 +1,10 @@
 #!/bin/bash
 # ============================================================
-# setup-notifications.sh — Add email notification vars to prod .env
-# and restart the backend. Idempotent (safe to run multiple times).
+# setup-notifications.sh — Configure Resend email notifications
+# in the prod backend .env and restart. Idempotent.
 #
 # Usage (as root):
-#   bash /home/castellon/repo/deploy/setup-notifications.sh
+#   RESEND_API_KEY='re_xxx' bash /home/castellon/repo/deploy/setup-notifications.sh
 # ============================================================
 set -e
 
@@ -15,51 +15,52 @@ ENV_FILE="$PROD/.env"
 
 [ "$EUID" -ne 0 ] && { echo "Run as root"; exit 1; }
 [ ! -f "$ENV_FILE" ] && { echo "$ENV_FILE not found — run deploy.sh first"; exit 1; }
+[ -z "$RESEND_API_KEY" ] && { echo "Please export RESEND_API_KEY before running"; echo "  RESEND_API_KEY='re_xxx' bash $0"; exit 1; }
 
-echo ">>> Ensuring notification variables in $ENV_FILE"
+NOTIFY_EMAIL="${NOTIFY_EMAIL:-pzsuave007@gmail.com}"
+NOTIFY_FROM="${NOTIFY_FROM:-no-reply@castellonsepticservices.com}"
 
-set_var() {
-    local key="$1"
-    local val="$2"
-    if grep -q "^${key}=" "$ENV_FILE"; then
-        sed -i "s|^${key}=.*|${key}=${val}|" "$ENV_FILE"
-        echo "  updated: ${key}"
-    else
-        echo "${key}=${val}" >> "$ENV_FILE"
-        echo "  added:   ${key}"
-    fi
+echo ">>> Setting notification vars in $ENV_FILE"
+
+# Wipe old SMTP / NOTIFY vars, then re-add clean set
+sed -i '/^SMTP_/d; /^NOTIFY_/d; /^RESEND_API_KEY=/d' "$ENV_FILE"
+{
+    echo "NOTIFY_ENABLED=true"
+    echo "NOTIFY_EMAIL=$NOTIFY_EMAIL"
+    echo "NOTIFY_FROM=$NOTIFY_FROM"
+    echo "RESEND_API_KEY=$RESEND_API_KEY"
+} >> "$ENV_FILE"
+
+echo ">>> Installing resend Python package..."
+su -s /bin/bash -c "$PROD/venv/bin/pip install resend >/dev/null 2>&1" "$CPANEL_USER" || {
+    echo "pip install failed — check $PROD/venv"
+    exit 1
 }
 
-set_var NOTIFY_ENABLED "true"
-set_var NOTIFY_EMAIL "pzsuave007@gmail.com"
-set_var NOTIFY_FROM "no-reply@castellonsepticservices.com"
-set_var SMTP_HOST "localhost"
-set_var SMTP_PORT "25"
-
-echo ""
 echo ">>> Restarting backend on port $PORT..."
 lsof -ti:${PORT} 2>/dev/null | xargs -r kill -9 2>/dev/null || true
-sleep 1
+sleep 2
 
-su -s /bin/bash -l "$CPANEL_USER" -c "
+sudo -u "$CPANEL_USER" bash -c "
     cd $PROD
     nohup $PROD/venv/bin/uvicorn server:app \
         --host 127.0.0.1 --port $PORT \
-        --app-dir $PROD > $PROD/backend.log 2>&1 &
+        --app-dir $PROD >> $PROD/backend.log 2>&1 &
+    disown
 "
 
 sleep 3
 if curl -sf "http://127.0.0.1:${PORT}/api/" >/dev/null; then
     echo ""
-    echo "Notification vars set and backend restarted"
+    echo "Notifications configured and backend restarted"
     echo ""
-    echo "Current config:"
-    grep -E "^(NOTIFY|SMTP)" "$ENV_FILE" | sed 's/^/   /'
+    echo "Config:"
+    grep -E "^(NOTIFY|RESEND_API_KEY)" "$ENV_FILE" | sed 's/RESEND_API_KEY=.*/RESEND_API_KEY=re_***HIDDEN***/' | sed 's/^/   /'
     echo ""
-    echo "Next step — send a test email:"
+    echo "Test it:"
     echo "   bash /home/castellon/repo/deploy/test-notify.sh"
 else
     echo "Backend not responding — check $PROD/backend.log"
-    tail -n 20 "$PROD/backend.log"
+    tail -n 30 "$PROD/backend.log"
     exit 1
 fi
