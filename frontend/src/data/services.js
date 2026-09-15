@@ -10,7 +10,7 @@ export const SERVICE_PAGES = {
     short: "Residential Septic",
     icon: Home,
     eyebrow: "FOR HOMEOWNERS & RURAL PROPERTIES",
-    headline: "Reliable Septic Pumping For Homes Across Eastern WA & North Idaho",
+    headline: "Reliable Septic Pumping For Homes Across Eastern Washington",
     intro:
       "If your home runs on a septic system instead of city sewer, regular pumping isn't optional — it's the single best thing you can do to protect your drain field and your wallet. Our 1,800-gallon vacuum truck handles standard residential tanks (1,000–2,000 gal) in a single trip, no second visit needed.",
     image: "/rural-home.jpg",
@@ -25,7 +25,7 @@ export const SERVICE_PAGES = {
     whenNeeded:
       "Most rural homes need pumping every 3–5 years, depending on tank size and household usage. Larger households, garbage disposals, or smaller tanks (under 1,000 gal) typically need service every 2–3 years. If you notice slow drains, gurgling pipes, lush patches over the drain field, or odors near the tank, do not wait — call us right away.",
     steps: [
-      { t: "Schedule online or by phone", d: "Pick a time slot on our calendar or call (509) 389-6138 for same-week service." },
+      { t: "Schedule online or by phone", d: "Pick a time slot on our calendar or call (509) 655-6480 for same-week service." },
       { t: "We arrive on time", d: "Truck pulls up, we locate lids (we can dig small access points), and protect your landscaping with mats and runners." },
       { t: "Pump & inspect", d: "Full pump-out with our 1,800-gal vacuum, plus baffle/filter check and sludge measurement." },
       { t: "Site clean & report", d: "Lids reseated, area cleaned, written service record handed off. You're done." },
@@ -130,13 +130,13 @@ export const SERVICE_PAGES = {
     whenNeeded:
       "Call us immediately if you see sewage backing up into the lowest drain or toilet in the house, hear gurgling from drains and pipes, smell sewage indoors or near the tank, see standing water or unusually green grass over the drain field, or hear your septic alarm. Don't run dishwashers, washing machines, or showers until we arrive — every additional gallon makes the situation worse.",
     steps: [
-      { t: "Call (509) 389-6138", d: "Real person answers. Describe the situation. We dispatch the next available truck." },
+      { t: "Call (509) 655-6480", d: "Real person answers. Describe the situation. We dispatch the next available truck." },
       { t: "Truck arrives", d: "Typical response window is same-day for backups within our radius. We confirm ETA up front." },
       { t: "Pump & diagnose", d: "Tank gets pumped to relieve pressure. We diagnose root cause — not just the symptom." },
       { t: "Honest next steps", d: "If it's just a full tank, you're done. If something deeper is wrong, you get clear options — not a hard upsell." },
     ],
     faqs: [
-      { q: "How fast can you actually get here?", a: "Most emergencies within 30 minutes of Spokane are reached the same day, often within 2–4 hours of the call. Further locations (CDA, Sandpoint) depend on truck availability." },
+      { q: "How fast can you actually get here?", a: "Most emergencies within 30 minutes of Spokane are reached the same day, often within 2–4 hours of the call. Further locations within our radius depend on truck availability." },
       { q: "Will an emergency call cost more?", a: "We charge a fair emergency rate that reflects the same-day dispatch. We tell you the price before we roll — no surprise invoices." },
       { q: "What if I'm outside business hours?", a: "Call the same number. Existing customers get priority after-hours response. For new customers we'll do our best — and at minimum we'll have a truck rolling first thing the next morning." },
     ],

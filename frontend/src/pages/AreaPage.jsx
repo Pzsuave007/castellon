@@ -152,7 +152,7 @@ export default function AreaPage() {
             <div className="eyebrow mb-3">WHY {area.city.toUpperCase()} CHOOSES CASTELLON</div>
             <h2 className="font-display text-3xl md:text-5xl text-navy">Local Crew. Local Standards. Local Pricing.</h2>
             <p className="text-[var(--muted)] leading-relaxed mt-5">
-              We&apos;ve been pumping septic tanks across {area.state === "WA" ? "Eastern Washington" : "North Idaho"} long enough to know the local soil, the seasonal access challenges, and what {area.city} property owners actually need.
+              We&apos;ve been pumping septic tanks across Eastern Washington long enough to know the local soil, the seasonal access challenges, and what {area.city} property owners actually need.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
@@ -161,7 +161,7 @@ export default function AreaPage() {
               { t: "Single-Trip Truck", d: "Our 1,800-gallon vacuum truck handles most residential tanks in one trip — no return visits, no extra fees." },
               { t: "Licensed & Insured", d: "Full liability coverage. We carry it because you deserve it — not because we want a marketing line." },
               { t: "Honest Pricing", d: `No surprise fees, no inflated "remote area" charges for ${area.city}. We tell you the price up front.` },
-              { t: "Real People Answer", d: "Call 509-389-6138 and a person picks up. No auto-attendants, no offshore call centers." },
+              { t: "Real People Answer", d: "Call 509-655-6480 and a person picks up. No auto-attendants, no offshore call centers." },
               { t: "We Show Up", d: "Booked for Tuesday at 10? We're there at 10. The septic industry has a reputation for ghosting — we don't." },
             ].map((b) => (
               <div key={b.t} className="bg-white border-2 border-[var(--border-strong)] p-5">

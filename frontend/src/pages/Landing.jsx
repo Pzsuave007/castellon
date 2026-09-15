@@ -24,17 +24,17 @@ const SERVICES = [
 
 const REVIEWS = [
   { name: "Marcus T.", city: "Spokane Valley, WA", stars: 5, text: "Called Castellon on a Saturday morning with a septic backup. Truck was on-site by noon, job was done by 2pm. Honest pricing, no surprises. Already booked them for annual maintenance." },
-  { name: "Janelle R.", city: "Coeur d'Alene, ID", stars: 5, text: "We run a small Mexican restaurant in CDA. Castellon handles our grease trap on a quarterly contract and they have never missed a date. Professional crew, clean job site every time." },
+  { name: "Janelle R.", city: "Spokane, WA", stars: 5, text: "We run a small Mexican restaurant on the North Side. Castellon handles our grease trap on a quarterly contract and they have never missed a date. Professional crew, clean job site every time." },
   { name: "Brian K.", city: "Cheney, WA", stars: 5, text: "Best septic service in the Spokane area, hands down. The 1,800-gallon truck handled our farm's tank in one trip — competitors needed two visits and charged for both." },
-  { name: "Holly D.", city: "Post Falls, ID", stars: 5, text: "Property manager for 3 apartment complexes — Castellon is the only company we trust. They show up, they communicate, the price is fair." },
+  { name: "Holly D.", city: "Deer Park, WA", stars: 5, text: "Property manager for 3 apartment complexes — Castellon is the only company we trust. They show up, they communicate, the price is fair." },
 ];
 
 const FAQS = [
   { q: "How often should I pump my septic tank?", a: "Most residential septic tanks should be pumped every 3–5 years depending on household size, tank capacity, and usage. Restaurants and commercial properties typically need more frequent service. We provide a custom recommendation when we inspect your system." },
-  { q: "How much does septic pumping cost?", a: "Pricing varies by tank size, location, and accessibility. Most residential pump-outs in the Spokane area fall in a competitive market range. Call 509-389-6138 or request a quote and we'll give you a transparent estimate — no hidden fees." },
+  { q: "How much does septic pumping cost?", a: "Pricing varies by tank size, location, and accessibility. Most residential pump-outs in the Spokane area fall in a competitive market range. Call 509-655-6480 or request a quote and we'll give you a transparent estimate — no hidden fees." },
   { q: "How often should restaurants clean grease traps?", a: "Most municipalities require grease trap cleaning every 30–90 days depending on size and volume. Failing to maintain a schedule can result in fines and code violations. We offer monthly maintenance contracts to keep you compliant." },
-  { q: "Do you offer emergency service?", a: "Yes. We dispatch the same day for septic backups and emergency pump-outs throughout our 2-hour service radius. Call us directly at 509-389-6138 for fastest response." },
-  { q: "What areas do you serve?", a: "We serve Eastern Washington and North Idaho within a 2-hour radius of Spokane — including Spokane Valley, Cheney, Airway Heights, Deer Park, Colville, Pullman, Coeur d'Alene, Post Falls, Hayden, Rathdrum, and Sandpoint." },
+  { q: "Do you offer emergency service?", a: "Yes. We dispatch the same day for septic backups and emergency pump-outs throughout our service radius. Call us directly at 509-655-6480 for fastest response." },
+  { q: "What areas do you serve?", a: "We serve Spokane and Eastern Washington within a 2-hour radius of Spokane — including Spokane Valley, Cheney, Airway Heights, Deer Park, Colville, and Pullman." },
   { q: "How quickly can you respond?", a: "Standard service is typically booked within 24–72 hours. Emergency calls are dispatched the same day, often within hours, depending on truck availability and your location." },
 ];
 
@@ -60,7 +60,7 @@ export default function Landing() {
                 <span className="font-display text-sm tracking-widest">24/7 EMERGENCY SERVICE AVAILABLE</span>
               </div>
 
-              <div className="font-mono-tiny text-[11px] mb-3 text-[var(--muted)] rise">SPOKANE, WA · EST. SERVING EASTERN WA + N. IDAHO</div>
+              <div className="font-mono-tiny text-[11px] mb-3 text-[var(--muted)] rise">SPOKANE, WA · SERVING EASTERN WASHINGTON</div>
 
               <h1 className="font-display text-5xl sm:text-7xl lg:text-[5.5rem] text-navy max-w-4xl rise" data-testid="hero-headline">
                 Professional Septic <span className="text-[var(--amber)]">&</span><br />
@@ -72,7 +72,7 @@ export default function Landing() {
               </h1>
 
               <p className="mt-7 text-lg md:text-xl text-[var(--muted)] max-w-2xl rise rise-delay-1" data-testid="hero-subheadline">
-                Serving residential and commercial customers across Eastern Washington and North Idaho with a
+                Serving residential and commercial customers across Spokane and Eastern Washington with a
                 1,800-gallon vacuum truck — and a crew that shows up on time.
               </p>
 
@@ -134,7 +134,7 @@ export default function Landing() {
             { i: Shield, t: "Licensed & Insured" },
             { i: HardHat, t: "Professional Crew" },
             { i: Gauge, t: "1,800-Gal Vacuum Truck" },
-            { i: MapPin, t: "Local · WA + N. Idaho" },
+            { i: MapPin, t: "Local · Eastern WA" },
           ].map((b, idx) => (
             <div key={idx} className="flex items-center gap-3" data-testid={`trust-badge-${idx}`}>
               <div className="w-12 h-12 bg-[var(--amber)] flex items-center justify-center shrink-0">
@@ -195,37 +195,22 @@ export default function Landing() {
             <div className="eyebrow mb-3">SERVICE AREA</div>
             <h2 className="font-display text-4xl md:text-6xl mb-6 text-navy">2-Hour Rapid Response Radius</h2>
             <p className="text-[var(--muted)] leading-relaxed mb-8">
-              Headquartered in Spokane, WA — we serve customers throughout Eastern Washington and North Idaho.
+              Headquartered in Spokane, WA — we serve customers throughout Eastern Washington.
               If you&apos;re within a 2-hour drive, we can be there.
             </p>
 
-            <div className="grid grid-cols-2 gap-6">
-              <div className="bg-white border-2 border-[var(--border-strong)] p-5">
-                <div className="font-display text-2xl text-navy mb-3 border-b-2 border-[var(--amber)] pb-1 inline-block">WASHINGTON</div>
-                <ul className="space-y-1.5 text-sm">
-                  {AREA_LIST.filter((a) => a.state === "WA").map((a) => (
-                    <li key={a.slug}>
-                      <Link to={`/areas/${a.slug}`} className="flex items-center gap-2 text-navy hover:text-[var(--amber)] transition" data-testid={`area-link-${a.slug}`}>
-                        <MapPin className="w-3.5 h-3.5 text-[var(--amber)]" />
-                        {a.city}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-white border-2 border-[var(--border-strong)] p-5">
-                <div className="font-display text-2xl text-navy mb-3 border-b-2 border-[var(--amber)] pb-1 inline-block">NORTH IDAHO</div>
-                <ul className="space-y-1.5 text-sm">
-                  {AREA_LIST.filter((a) => a.state === "ID").map((a) => (
-                    <li key={a.slug}>
-                      <Link to={`/areas/${a.slug}`} className="flex items-center gap-2 text-navy hover:text-[var(--amber)] transition" data-testid={`area-link-${a.slug}`}>
-                        <MapPin className="w-3.5 h-3.5 text-[var(--amber)]" />
-                        {a.city}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="bg-white border-2 border-[var(--border-strong)] p-5">
+              <div className="font-display text-2xl text-navy mb-3 border-b-2 border-[var(--amber)] pb-1 inline-block">WASHINGTON</div>
+              <ul className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-sm">
+                {AREA_LIST.map((a) => (
+                  <li key={a.slug}>
+                    <Link to={`/areas/${a.slug}`} className="flex items-center gap-2 text-navy hover:text-[var(--amber)] transition" data-testid={`area-link-${a.slug}`}>
+                      <MapPin className="w-3.5 h-3.5 text-[var(--amber)]" />
+                      {a.city}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
@@ -244,7 +229,7 @@ export default function Landing() {
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-[var(--navy)] rounded-full shadow-[0_0_0_4px_var(--amber)]" />
             <div className="absolute left-1/2 top-1/2 ml-5 mt-2 font-display text-lg text-navy">SPOKANE HQ</div>
             <div className="absolute bottom-4 left-4 right-4 font-mono-tiny text-[10px] text-navy">
-              2-HOUR SERVICE RADIUS · EASTERN WA + N. IDAHO
+              2-HOUR SERVICE RADIUS · EASTERN WASHINGTON
             </div>
           </div>
         </div>

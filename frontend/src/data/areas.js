@@ -48,54 +48,6 @@ export const AREAS = {
       "Deer Park and the surrounding rural properties almost universally run on septic. We bring a 1,800-gallon vacuum truck out there in a single trip — competitors often need two visits and charge for both. Our regulars in Deer Park keep us on speed dial.",
     keyword: "septic pumping Deer Park WA",
   },
-  "coeur-dalene-id": {
-    slug: "coeur-dalene-id",
-    city: "Coeur d'Alene",
-    state: "ID",
-    display: "Coeur d'Alene, ID",
-    distance: "35 min E of Spokane",
-    driveTime: "35–50 minutes",
-    neighborhoods: ["Downtown CDA", "Fernan Lake", "Atlas", "Dalton Gardens", "Riverstone"],
-    intro:
-      "We cross the state line every week. Coeur d'Alene homeowners and lakeside properties trust Castellon for residential septic pumping, and we handle several restaurants in the downtown core on quarterly grease trap contracts. Same response time as a local Idaho operator — usually faster.",
-    keyword: "septic pumping Coeur d'Alene ID",
-  },
-  "post-falls-id": {
-    slug: "post-falls-id",
-    city: "Post Falls",
-    state: "ID",
-    display: "Post Falls, ID",
-    distance: "25 min E of Spokane",
-    driveTime: "25–40 minutes",
-    neighborhoods: ["Riverbend", "Highway 41 corridor", "Stateline area"],
-    intro:
-      "Post Falls is one of our most-served Idaho cities. Property managers in Post Falls have used Castellon for years for apartment complexes and multi-family units — same-day emergency dispatch from Spokane reaches Post Falls before most local providers can mobilize.",
-    keyword: "septic pumping Post Falls ID",
-  },
-  "hayden-id": {
-    slug: "hayden-id",
-    city: "Hayden",
-    state: "ID",
-    display: "Hayden, ID",
-    distance: "45 min E of Spokane",
-    driveTime: "45–55 minutes",
-    neighborhoods: ["Hayden Lake", "Honeysuckle", "Government Way corridor"],
-    intro:
-      "Hayden homes — especially the lakeside acreage — are almost all on septic. We service the whole Hayden Lake area and out toward Rathdrum on regular maintenance schedules. Local Idaho crews stay busy with their own backyards; we have the capacity to actually show up.",
-    keyword: "septic pumping Hayden ID",
-  },
-  "sandpoint-id": {
-    slug: "sandpoint-id",
-    city: "Sandpoint",
-    state: "ID",
-    display: "Sandpoint, ID",
-    distance: "1.5 hr NE of Spokane",
-    driveTime: "1h 30m–1h 50m",
-    neighborhoods: ["Lake Pend Oreille", "Dover", "Ponderay", "Sagle"],
-    intro:
-      "Sandpoint is at the outer edge of our 2-hour service radius — but it's worth the drive. We service vacation homes around Lake Pend Oreille, rural full-time residents, and a handful of restaurants. We coordinate same-week scheduling so you're not waiting on a one-truck operation.",
-    keyword: "septic pumping Sandpoint ID",
-  },
 };
 
 export const AREA_LIST = Object.values(AREAS);

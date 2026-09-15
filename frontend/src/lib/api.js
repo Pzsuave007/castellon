@@ -30,8 +30,8 @@ export function formatApiError(detail) {
   return String(detail);
 }
 
-export const PHONE = "509-389-6138";
-export const PHONE_HREF = "tel:+15093896138";
+export const PHONE = "509-655-6480";
+export const PHONE_HREF = "tel:+15096556480";
 export const COMPANY = "Castellon Septic Services";
 
 export const SERVICES = [
