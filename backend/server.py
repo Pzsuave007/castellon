@@ -17,7 +17,7 @@ from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
 
-from notifications import notify_new_booking, notify_new_quote, notify_test
+from notifications import notify_new_booking, notify_new_quote, notify_test, diagnostics as notify_diagnostics
 
 
 # ============================================================================
@@ -352,13 +352,11 @@ async def get_admin_availability(_: dict = Depends(get_current_admin)):
 
 @api.post("/admin/notify/test")
 async def send_test_notification(_: dict = Depends(get_current_admin)):
-    """Trigger a test email so the owner can confirm notifications are working."""
-    ok = notify_test()
+    """Trigger a test email and return full diagnostics so the owner can debug delivery."""
+    result = notify_test()
     return {
-        "ok": ok,
-        "enabled": os.environ.get("NOTIFY_ENABLED", "false").lower() in ("1", "true", "yes"),
-        "to": os.environ.get("NOTIFY_EMAIL"),
-        "from": os.environ.get("NOTIFY_FROM", "no-reply@castellonsepticservices.com"),
+        "result": result,
+        "config": notify_diagnostics(),
     }
 
 
