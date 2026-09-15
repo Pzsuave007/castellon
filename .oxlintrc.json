@@ -1,0 +1,18 @@
+{
+  "ignorePatterns": [
+    "frontend/build/**",
+    "frontend/node_modules/**",
+    "**/*.min.js",
+    "backend/venv/**",
+    "**/__pycache__/**"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2022": true
+  },
+  "globals": {
+    "WorkerGlobalScope": "readonly",
+    "__REACT_DEVTOOLS_GLOBAL_HOOK__": "readonly"
+  }
+}

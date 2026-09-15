@@ -71,12 +71,32 @@ def _send_via_sendmail(msg: EmailMessage, sendmail_bin: str) -> Tuple[bool, str]
 
 
 def _send_via_smtplib(msg: EmailMessage) -> Tuple[bool, str]:
+    """Send using smtplib. If SMTP_USER + SMTP_PASSWORD are set, use authenticated
+    SMTP over STARTTLS (port 587) or SSL (port 465). Otherwise falls back to
+    unauthenticated plain SMTP.
+    """
     host = os.environ.get("SMTP_HOST", "localhost")
     port = int(os.environ.get("SMTP_PORT", "25"))
+    user = os.environ.get("SMTP_USER")
+    password = os.environ.get("SMTP_PASSWORD")
+    use_ssl = os.environ.get("SMTP_USE_SSL", "false").lower() in ("1", "true", "yes")
+
     try:
-        with smtplib.SMTP(host, port, timeout=10) as s:
-            s.send_message(msg)
-        return True, f"smtplib ok host={host}:{port}"
+        if use_ssl or port == 465:
+            with smtplib.SMTP_SSL(host, port, timeout=15) as s:
+                if user and password:
+                    s.login(user, password)
+                s.send_message(msg)
+            return True, f"smtplib SSL ok host={host}:{port} auth={'yes' if user else 'no'}"
+        else:
+            with smtplib.SMTP(host, port, timeout=15) as s:
+                s.ehlo()
+                if user and password:
+                    s.starttls()
+                    s.ehlo()
+                    s.login(user, password)
+                s.send_message(msg)
+            return True, f"smtplib ok host={host}:{port} auth={'yes' if user else 'no'}"
     except Exception as e:
         return False, f"smtplib failed host={host}:{port} err={e!r}"
 
@@ -95,26 +115,41 @@ def _send(subject: str, body: str) -> dict:
 
     msg = _build_message(subject, body, to_addr, from_addr)
 
-    # Try sendmail binary first
+    # If SMTP credentials are set, prefer authenticated SMTP (bulletproof).
+    # Otherwise fall back to local sendmail, then to unauthenticated SMTP.
+    if os.environ.get("SMTP_USER") and os.environ.get("SMTP_PASSWORD"):
+        ok, detail = _send_via_smtplib(msg)
+        if ok:
+            logger.info("[notify] sent via authenticated SMTP -> %s (%s)", to_addr, subject)
+            return {"ok": True, "transport": "smtplib (auth)", "detail": detail}
+        logger.warning("[notify] authenticated SMTP failed: %s", detail)
+        first_err = detail
+    else:
+        first_err = None
+
+    # Try sendmail binary
     sendmail_bin = _find_sendmail()
     if sendmail_bin:
         ok, detail = _send_via_sendmail(msg, sendmail_bin)
         if ok:
             logger.info("[notify] sent via sendmail -> %s (%s)", to_addr, subject)
             return {"ok": True, "transport": f"sendmail ({sendmail_bin})", "detail": detail}
-        logger.warning("[notify] sendmail failed, trying smtplib: %s", detail)
-        first_err = detail
+        logger.warning("[notify] sendmail failed: %s", detail)
+        sendmail_err = detail
     else:
-        first_err = "no sendmail binary found; falling back to smtplib"
-        logger.warning("[notify] %s", first_err)
+        sendmail_err = "no sendmail binary found"
+        logger.warning("[notify] %s", sendmail_err)
 
-    # Fallback to smtplib on localhost:25
-    ok, detail = _send_via_smtplib(msg)
-    if ok:
-        logger.info("[notify] sent via smtplib -> %s (%s)", to_addr, subject)
-        return {"ok": True, "transport": "smtplib", "detail": detail}
-    logger.error("[notify] all transports failed: sendmail=%s | smtplib=%s", first_err, detail)
-    return {"ok": False, "transport": None, "detail": f"sendmail={first_err} | smtplib={detail}"}
+    # Last resort: unauthenticated smtplib (only if we didn't already try authenticated)
+    if not first_err:
+        ok, detail = _send_via_smtplib(msg)
+        if ok:
+            logger.info("[notify] sent via smtplib -> %s (%s)", to_addr, subject)
+            return {"ok": True, "transport": "smtplib", "detail": detail}
+        first_err = detail
+
+    logger.error("[notify] all transports failed: smtp_auth=%s | sendmail=%s", first_err, sendmail_err)
+    return {"ok": False, "transport": None, "detail": f"smtp_auth={first_err} | sendmail={sendmail_err}"}
 
 
 def notify_new_booking(b: dict) -> dict:
