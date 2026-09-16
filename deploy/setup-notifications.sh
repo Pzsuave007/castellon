@@ -32,7 +32,8 @@ sed -i '/^SMTP_/d; /^NOTIFY_/d; /^RESEND_API_KEY=/d' "$ENV_FILE"
 } >> "$ENV_FILE"
 
 echo ">>> Installing resend Python package..."
-su -s /bin/bash -c "$PROD/venv/bin/pip install resend >/dev/null 2>&1" "$CPANEL_USER" || {
+runuser -u "$CPANEL_USER" -- "$PROD/venv/bin/pip" install resend >/dev/null 2>&1 || \
+    su -s /bin/bash -c "$PROD/venv/bin/pip install resend >/dev/null 2>&1" "$CPANEL_USER" || {
     echo "pip install failed — check $PROD/venv"
     exit 1
 }
@@ -41,6 +42,10 @@ echo ">>> Restarting backend on port $PORT..."
 lsof -ti:${PORT} 2>/dev/null | xargs -r kill -9 2>/dev/null || true
 sleep 2
 
+# Try setsid + runuser first (works even when the user has no shell — cPanel default)
+setsid -f runuser -u "$CPANEL_USER" -- "$PROD/venv/bin/uvicorn" server:app \
+    --host 127.0.0.1 --port "$PORT" --app-dir "$PROD" \
+    >> "$PROD/backend.log" 2>&1 < /dev/null || \
 sudo -u "$CPANEL_USER" bash -c "
     cd $PROD
     nohup $PROD/venv/bin/uvicorn server:app \

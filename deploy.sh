@@ -23,7 +23,9 @@ echo ">>> Castellon Septic — deploy for ${CPANEL_USER} on port ${PORT}"
 # Trust every git dir (fix "dubious ownership")
 git config --global --add safe.directory '*' 2>/dev/null || true
 
-as_user() { su -s /bin/bash -l "$CPANEL_USER" -c "$1"; }
+as_user() {
+    runuser -u "$CPANEL_USER" -- bash -c "$1" 2>/dev/null || su -s /bin/bash "$CPANEL_USER" -c "$1"
+}
 
 # ------------------------------------------------------------
 # FIRST-TIME INSTALL vs UPDATE

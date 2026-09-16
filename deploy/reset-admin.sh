@@ -29,12 +29,12 @@ echo ">>> Restarting backend on port $PORT..."
 lsof -ti:${PORT} 2>/dev/null | xargs -r kill -9 2>/dev/null || true
 sleep 1
 
-su -s /bin/bash -l "$CPANEL_USER" -c "
+su -s /bin/bash "$CPANEL_USER" -c "
     cd $PROD
     nohup $PROD/venv/bin/uvicorn server:app \
         --host 127.0.0.1 --port $PORT \
         --app-dir $PROD > $PROD/backend.log 2>&1 &
-"
+" 2>/dev/null || setsid -f runuser -u "$CPANEL_USER" -- "$PROD/venv/bin/uvicorn" server:app --host 127.0.0.1 --port "$PORT" --app-dir "$PROD" > "$PROD/backend.log" 2>&1 < /dev/null
 
 sleep 3
 if curl -sf "http://127.0.0.1:${PORT}/api/" >/dev/null; then

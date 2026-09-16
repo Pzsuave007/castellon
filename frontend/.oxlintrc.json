@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    "build/**",
+    "node_modules/**",
+    "**/*.min.js",
+    "**/*.map"
+  ],
+  "env": {
+    "browser": true,
+    "worker": true,
+    "serviceworker": true,
+    "es2022": true
+  },
+  "globals": {
+    "WorkerGlobalScope": "readonly",
+    "__REACT_DEVTOOLS_GLOBAL_HOOK__": "writable",
+    "globalThis": "readonly",
+    "self": "readonly"
+  },
+  "rules": {
+    "no-undef": "off"
+  },
+  "overrides": [
+    {
+      "files": ["build/**", "**/*.min.js"],
+      "rules": {
+        "no-undef": "off",
+        "emergent(no-undef)": "off"
+      }
+    }
+  ]
+}
